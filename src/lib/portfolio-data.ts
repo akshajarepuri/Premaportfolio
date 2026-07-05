@@ -10,7 +10,8 @@ export type Certification = { id: string; name: string; issuer: string; year: st
 export type Service = { id: string; title: string; description: string; icon: string | null; sort_order: number };
 
 const list = <T,>(table: string) => async (): Promise<T[]> => {
-  const { data, error } = await supabase.from(table).select("*").order("sort_order", { ascending: true });
+  // Types file not regenerated for new tables; cast to any for the query builder.
+  const { data, error } = await (supabase as any).from(table).select("*").order("sort_order", { ascending: true });
   if (error) throw error;
   return (data ?? []) as T[];
 };
