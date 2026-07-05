@@ -1,9 +1,9 @@
 [build]
-command = "npm run build"
+command = "bun run build"
 publish = ".output/public"
 
 [dev]
-command = "npm run dev"
+command = "bun run dev"
 port = 8080
 
 [[redirects]]
