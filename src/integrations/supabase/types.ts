@@ -14,16 +14,288 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      achievements: {
+        Row: {
+          description: string
+          id: string
+          sort_order: number
+          title: string
+          year: string | null
+        }
+        Insert: {
+          description: string
+          id?: string
+          sort_order?: number
+          title: string
+          year?: string | null
+        }
+        Update: {
+          description?: string
+          id?: string
+          sort_order?: number
+          title?: string
+          year?: string | null
+        }
+        Relationships: []
+      }
+      certifications: {
+        Row: {
+          id: string
+          issuer: string
+          name: string
+          sort_order: number
+          url: string | null
+          year: string | null
+        }
+        Insert: {
+          id?: string
+          issuer: string
+          name: string
+          sort_order?: number
+          url?: string | null
+          year?: string | null
+        }
+        Update: {
+          id?: string
+          issuer?: string
+          name?: string
+          sort_order?: number
+          url?: string | null
+          year?: string | null
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      education: {
+        Row: {
+          degree: string
+          id: string
+          institution: string
+          period: string
+          score: string | null
+          sort_order: number
+        }
+        Insert: {
+          degree: string
+          id?: string
+          institution: string
+          period: string
+          score?: string | null
+          sort_order?: number
+        }
+        Update: {
+          degree?: string
+          id?: string
+          institution?: string
+          period?: string
+          score?: string | null
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      experience: {
+        Row: {
+          bullets: string[]
+          company: string
+          description: string
+          id: string
+          period: string
+          role: string
+          sort_order: number
+        }
+        Insert: {
+          bullets?: string[]
+          company: string
+          description: string
+          id?: string
+          period: string
+          role: string
+          sort_order?: number
+        }
+        Update: {
+          bullets?: string[]
+          company?: string
+          description?: string
+          id?: string
+          period?: string
+          role?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          created_at: string
+          description: string
+          featured: boolean
+          github_url: string | null
+          id: string
+          image_url: string | null
+          live_url: string | null
+          long_description: string | null
+          sort_order: number
+          tech: string[]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          image_url?: string | null
+          live_url?: string | null
+          long_description?: string | null
+          sort_order?: number
+          tech?: string[]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          featured?: boolean
+          github_url?: string | null
+          id?: string
+          image_url?: string | null
+          live_url?: string | null
+          long_description?: string | null
+          sort_order?: number
+          tech?: string[]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          description: string
+          icon: string | null
+          id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          description: string
+          icon?: string | null
+          id?: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          description?: string
+          icon?: string | null
+          id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          level: number | null
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          level?: number | null
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          level?: number | null
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +422,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
