@@ -11,6 +11,16 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/poppins/800.css";
+import { ThemeProvider } from "@/lib/theme";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +87,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Prema Akshaja Repuri — Full Stack Developer & AI Explorer" },
+      { name: "description", content: "Portfolio of Prema Akshaja Repuri — Computer Science student at GITAM University, full stack MERN developer, cloud enthusiast and AI explorer." },
+      { name: "author", content: "Prema Akshaja Repuri" },
+      { property: "og:title", content: "Prema Akshaja Repuri — Full Stack Developer & AI Explorer" },
+      { property: "og:description", content: "Full stack developer, cloud enthusiast and AI explorer building scalable, intelligent digital products." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -102,11 +111,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body className="min-h-screen bg-background text-foreground">
         {children}
         <Scripts />
       </body>
@@ -119,8 +128,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ThemeProvider>
+        <Outlet />
+        <Toaster theme="dark" position="top-right" richColors />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
