@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Download, ArrowRight, Github, Linkedin, Mail, Sparkles, ArrowDown } from "lucide-react";
-import { SiReact, SiNodedotjs, SiMongodb, SiAmazonwebservices, SiPython } from "react-icons/si";
+import { SiReact, SiNodedotjs, SiMongodb, SiPython, SiDocker } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 import profileImg from "@/assets/profile.jpg";
 
@@ -29,7 +29,7 @@ const ORBIT = [
   { Icon: SiReact, color: "text-[#61DAFB]" },
   { Icon: SiNodedotjs, color: "text-[#8CC84B]" },
   { Icon: SiMongodb, color: "text-[#00ED64]" },
-  { Icon: SiAmazonwebservices, color: "text-[#FF9900]" },
+  { Icon: SiDocker, color: "text-[#2496ED]" },
   { Icon: FaJava, color: "text-[#EA2D2E]" },
   { Icon: SiPython, color: "text-[#FFD43B]" },
 ];
