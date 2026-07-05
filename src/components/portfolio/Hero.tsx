@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Download, ArrowRight, Github, Linkedin, Mail, Sparkles, ArrowDown } from "lucide-react";
 import { SiReact, SiNodedotjs, SiMongodb, SiPython, SiDocker } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
-import profileImg from "@/assets/profile.jpg";
+import profileImg from "@/assets/profile.png";
 
 const ROLES = ["Computer Science Engineer", "Full Stack MERN Developer", "Cloud Enthusiast", "AI Explorer", "Software Developer", "Problem Solver"];
 

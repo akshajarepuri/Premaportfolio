@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Mail, Phone, Linkedin, Send } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
+import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
+
+// Initialize EmailJS
+emailjs.init("TRaRHPIP4K1IL8jzU");
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -20,12 +23,33 @@ export function Contact() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
-    if (!parsed.success) { toast.error(parsed.error.issues[0].message); return; }
+    if (!parsed.success) { 
+      toast.error(parsed.error.issues[0].message); 
+      return; 
+    }
+    
     setLoading(true);
-    const { error } = await (supabase as any).from("contact_messages").insert(parsed.data);
-    setLoading(false);
-    if (error) toast.error("Failed to send. Please try again.");
-    else { toast.success("Message sent — I'll get back to you soon!"); setForm({ name: "", email: "", subject: "", message: "" }); }
+    try {
+      const response = await emailjs.send(
+        "service_sdyhhcd", // Service ID
+        "template_pad4f3a", // Template ID
+        {
+          from_name: parsed.data.name,
+          from_email: parsed.data.email,
+          subject: parsed.data.subject || "Portfolio Contact",
+          message: parsed.data.message,
+        }
+      );
+      
+      console.log("Email sent successfully:", response);
+      toast.success("Message sent — I'll get back to you soon!");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch (error: any) {
+      console.error("EmailJS Error Details:", error);
+      toast.error(error?.text || "Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
